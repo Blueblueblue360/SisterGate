@@ -6,7 +6,7 @@ class Index extends Controller
 {
     public function index()
     {
-        $question = Db::name('mydb.mbti')->select();
+        $question = M('mbti')->select();
 		$this->assign('question',$question);
 		return $this->fetch();
     }
@@ -51,7 +51,7 @@ class Index extends Controller
 			$result .='P';
 		}
 		
-		$explain = Db::name('mydb.mbti_answer')->where('lx',$result)->find();
+		$explain = M('mydb.mbti_answer')->where('lx',$result)->find();
 		return $explain['explain'];		
 	}
 }
