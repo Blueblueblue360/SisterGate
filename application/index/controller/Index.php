@@ -1,6 +1,5 @@
 <?php
 namespace app\index\controller;
-use think\Db;
 use think\Controller;
 class Index extends Controller
 {
@@ -14,8 +13,7 @@ class Index extends Controller
 	{
 		$a = input('post.a/a');
 		$b = input('post.b/a');
-		$E =0;$I =0;$S =0;$N =0;$T =0;$F =0;$J =0;$P =0;
-			
+		$E =0;$I =0;$S =0;$N =0;$T =0;$F =0;$J =0;$P =0;	
 		for($i=1;$i<49;$i= $i+4){
 			$E = $E + $a[$i];
 			$I = $I + $b[$i];

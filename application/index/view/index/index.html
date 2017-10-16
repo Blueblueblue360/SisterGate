@@ -5,6 +5,7 @@
 <title>性格类型测评</title>
 <link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
 <link type="text/css" href="/statics/css/layui.css" rel="stylesheet" />
+<link type="text/css" href="/statics/css/progressBar.css" rel="stylesheet" />
 <style>
 body{
 	background-color:silver;	
@@ -14,8 +15,29 @@ body{
 </head>
 <body>
 <div class="grade_warp">
+<div id="progressBar">
+     <!-- 进度条 -->
+     <div>
+         <span></span>
+     </div>
+     <!-- 五个圆 -->
+     <span></span>
+     <span></span>
+     <span></span>
+     <span></span>
+     <span></span>
+</div>
 
-<?php foreach($question as $k=>$v){ ?>
+<?php $first = array_slice($question,0,9,true);
+$second = array_slice($question,9,13,true);
+$third = array_slice($question,21,9,true);
+$four = array_slice($question,30,13,true);
+$five = array_slice($question,43,5,true);
+$all = array('first'=>$first,'second'=>$second,'third'=>$third,'four'=>$four,'five'=>$five);
+foreach($all as $p=>$q){
+?>
+<div class="{$p}">
+<?php foreach($q as $k=>$v){ ?>
 <p>{$v['id']}.{$v['Question']}</p>
 	<div class="User_ratings User_grade" id="div_fraction0">
 A.{$v['Aoption']}
@@ -42,12 +64,14 @@ B.{$v['Boption']}
 			<span class="bars_10">5.0</span>
 		</div>
 	</div>
-   <p style="margin-top:120px;"></p>
-
+   <p style="margin-top:100px;"></p>
+	
 <?php }?>
-
-<input type="button" value="提交" id="submit" class="layui-btn layui-btn-big layui-btn-radius layui-btn-normal" style="margin-left:320px"/>
-
+<input type="button" value="下一组" class="layui-btn next" style="float:right"/>
+<input type="button" value="上一组" class="layui-btn back" style="float:left"/>
+<input type="button" value="提&nbsp;&nbsp;&nbsp;交" id="submit" class="layui-btn layui-btn-normal submit" style="float:right;display:none;"/>
+</div>
+<?php }?>
 </div>
    <p style="margin-top:120px;"></p>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
@@ -97,17 +121,22 @@ scale.prototype = {
 	}
 }
 
-
 $(function(){  
-   alltitle();
+   issues();
+   $('.back').hide();
+   $('.second').hide();
+   $('.third').hide();
+   $('.four').hide();
+   $('.five').hide();
+   $('#submit').hide();
 });  
-function alltitle(){
+function issues(){
 	for(var i=1;i<49;i++){
 	   new scale('A'+i);
 	   new scale('B'+i);
    }
 }
-$('#submit').click(function(){
+$('.submit').click(function(){
 	var Ascore =[];
 	var Bscore =[];
 	for(var j=1;j<49;j++){
@@ -123,6 +152,47 @@ $('#submit').click(function(){
         	alert("您的测试结果: \n" + data);
     });
 	
+});
+$('.next').click(function(){
+	var tmpa=$(this).parent().attr("class");
+	var tmpb,width,n;
+	switch(tmpa)
+	{
+		case "first":tmpb = "second";width = "25%";n=2;$('.back').show();
+		break;
+		case "second":tmpb = "third";width = "50%";n=3;
+		break;
+		case "third":tmpb = "four";width = "75%";n=4;
+		break;
+		case "four":tmpb = "five";width = "100%";n=5;$('.next').hide();$('.submit').show();
+		break;
+	}
+	$("#progressBar div span").css("width",width);
+	$("#progressBar>span:nth-child("+ n +")").css("background","#00BFFF");
+	$( "."+ tmpa +"" ).toggle( "drop" );
+	$( "."+ tmpb +"" ).show();
+	$('body').animate( {scrollTop: 0}, 500);
+});
+$('.back').click(function(){
+	var tmpa=$(this).parent().attr("class");
+	var tmpb,width,n;
+	switch(tmpa)
+	{
+		case "second":tmpb = "first";width = "0%";n=2;$('.back').hide();
+		break;
+		case "third":tmpb = "second";width = "25%";n=3;
+		break;
+		case "four":tmpb = "third";width = "50%";n=4;
+		break;
+		case "five":tmpb = "four";width = "75%";n=5;$('.next').show();$('.submit').hide();
+		break;
+	}	
+	$("#progressBar div span").css("width",width);
+	$("#progressBar>span:nth-child("+ n +")").css("background","#ccc");
+	$( "."+ tmpa +"" ).toggle( "drop" );
+	//$( "."+ tmpa +"" ).effect( "Explode", "slow");
+	$( "."+ tmpb +"" ).show();
+	$('body').animate( {scrollTop: 0}, 500);
 });
 </script>
 </body>
