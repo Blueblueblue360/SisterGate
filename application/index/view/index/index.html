@@ -38,35 +38,27 @@ foreach($all as $p=>$q){
 ?>
 <div class="{$p}">
 <?php foreach($q as $k=>$v){ ?>
-<p>{$v['id']}.{$v['Question']}</p>
+<p class="question">{$v['id']}.{$v['Question']}</p>
 	<div class="User_ratings User_grade" id="div_fraction0">
-A.{$v['Aoption']}
+A.{$v['Aoption']}<br />
+B.{$v['Boption']}
 	<div class="ratings_bars">       
+    		<span class="bars_10">A</span>
 			<span id="title_A{$v['id']}" class="title">0</span>
-			<span class="bars_10">0</span>
+
 			<div class="scale" id="bar_A{$v['id']}">
 				<div id="div_A{$v['id']}"></div>
 				<span id="btn_A{$v['id']}"></span>
 			</div>
-			<span class="bars_10">5.0</span>
-	</div>
-	</div>
-	
-	<div class="User_ratings User_grade" id="div_fraction0">
-B.{$v['Boption']}
-		<div class="ratings_bars">
+            
+            <span class="bars_10">B</span>
 			<span id="title_B{$v['id']}" class="title">0</span>
-			<span class="bars_10">0</span>
-			<div class="scale" id="bar_B{$v['id']}">
-				<div id="div_B{$v['id']}"></div>
-				<span id="btn_B{$v['id']}"></span>
-			</div>
-			<span class="bars_10">5.0</span>
-		</div>
+	</div>
 	</div>
    <p style="margin-top:100px;"></p>
-	
 <?php }?>
+<br />
+<p style="margin-top:100px;"></p>
 <input type="button" value="下一组" class="layui-btn next" style="float:right"/>
 <input type="button" value="上一组" class="layui-btn back" style="float:left"/>
 <input type="button" value="提&nbsp;&nbsp;&nbsp;交" id="submit" class="layui-btn layui-btn-normal submit" style="float:right;display:none;"/>
@@ -97,7 +89,7 @@ scale.prototype = {
 				var thisX = (e || b.event).clientX;
 				var to = m.min(max, m.max(-2, l + (thisX - x)));
 				f.btn.style.left = to + 'px';
-				f.ondrag(m.round(m.max(0, to / max) * 50), to , n);
+				f.ondrag(m.round(m.max(0, to / max) * 10), to , n);
 				b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
 			};
 			g.onmouseup = new Function('this.onmousemove=null');
@@ -105,18 +97,10 @@ scale.prototype = {
 	},
 	ondrag: function (pos, x ,n) {
 		this.step.style.width = Math.max(0, x) + 'px';
-		this.title.innerHTML = pos / 10 + '';
-
-		if(n.substr(0,1) === "A"){
-			var m = n.replace("A","B");
-		}else{
-			var m = n.replace("B","A");
-		}
-
+		this.title.innerHTML = pos /2 + '';
+		var m = n.replace("A","B");
 		var to = 200 - Math.max(0, x);
-		var html =( 50 - pos )/ 10+ '';
-		$("#btn_"+m).css("left",to+"px");
-		$("#div_"+m).css("width",to+"px");
+		var html =( 10 - pos )/ 2+ '';
 		$("#title_"+m).html(html);
 	}
 }
@@ -133,7 +117,6 @@ $(function(){
 function issues(){
 	for(var i=1;i<49;i++){
 	   new scale('A'+i);
-	   new scale('B'+i);
    }
 }
 $('.submit').click(function(){

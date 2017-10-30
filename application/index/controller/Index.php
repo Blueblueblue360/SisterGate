@@ -28,22 +28,22 @@ class Index extends Controller
 			$P = $P + $b[$i+3];
 		}
 		$result='';
-		if($E >= $I){
+		if($E > $I){
 			$result .='E';
 		}else{
 			$result .='I';
 		}
-		if($S >= $N){
+		if($S > $N){
 			$result .='S';
 		}else{
 			$result .='N';
 		}
-		if($T >= $F){
+		if($T > $F){
 			$result .='T';
 		}else{
 			$result .='F';
 		}
-		if($J >= $P){
+		if($J > $P){
 			$result .='J';
 		}else{
 			$result .='P';
