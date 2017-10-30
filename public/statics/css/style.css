@@ -4,13 +4,13 @@ a,a:hover{text-decoration:none;cursor: pointer;outline:none;}
 ul{list-style:none;}
 
 /*用户评分*/
-.grade_warp{width:840px;margin:10px auto 15px auto;}
+.grade_warp{width:980px;margin:10px auto 15px auto;}
 .question{font-family:"微软雅黑","宋体";font-size:24px;margin-bottom:15px;letter-spacing:1px;}
 .User_grade{width:400px;margin: auto 20px 10px auto;overflow:hidden;float:left;font-family:"微软雅黑","宋体";font-size:20px;line-height: 2;letter-spacing:1px;}
 .User_ratings .ratings_bars{width:407px;height:54px;margin-top:10px;float:left;}
 .User_ratings .ratings_bars .title{width:50px;height:30px;text-align:center;border:1px solid #bfbebe;line-height:25px;font-family:Georgia, "Times New Roman", Times, serif;font-size:20px;float:left;color:#a0a0a0;margin-right:10px;background:#fff;}
 
-.User_ratings .ratings_bars .bars_10{font-family:Georgia, "Times New Roman", Times, serif;font-size:30px;line-height:25px;float:left;color:#a0a0a0;}
+.User_ratings .ratings_bars .bars_10{font-family:Georgia, "Times New Roman", Times, serif;font-size:24px;line-height:25px;float:left;color:#a0a0a0;margin-top:5px;margin-right:10px;}
 .User_ratings .ratings_bars .scale{width:210px;height:13px;float:left;margin:7px 10px auto 10px;position:relative;background:url(../images/progress02.png) 0 0 no-repeat;}
 .User_ratings .ratings_bars .scale div{width:0px;position:absolute;width:0;left:0;height:13px;bottom:0;background:url(../images/progress02.png) 0 -14px no-repeat;}
 .User_ratings .ratings_bars .scale span{width:10px;height:26px;position:absolute;left:-2px;top:-7px;cursor:pointer;background:url(../images/j.png) no-repeat;}

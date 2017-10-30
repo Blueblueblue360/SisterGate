@@ -38,6 +38,7 @@ foreach($all as $p=>$q){
 ?>
 <div class="{$p}">
 <?php foreach($q as $k=>$v){ ?>
+<div >
 <p class="question">{$v['id']}.{$v['Question']}</p>
 	<div class="User_ratings User_grade" id="div_fraction0">
 A.{$v['Aoption']}<br />
@@ -56,6 +57,7 @@ B.{$v['Boption']}
 	</div>
 	</div>
    <p style="margin-top:100px;"></p>
+</div>
 <?php }?>
 <br />
 <p style="margin-top:100px;"></p>
