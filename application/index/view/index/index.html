@@ -8,9 +8,22 @@
 <link type="text/css" href="/statics/css/progressBar.css" rel="stylesheet" />
 <style>
 body{
-	background-color:silver;	
-}
 
+}
+.content{
+	background-color:#CCC; 
+	padding:10px 5px 0px 20px;
+	margin-top:40px;	
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+}
+.odd{
+	float:left;
+}
+.even{
+	float:right;
+}
 </style>
 </head>
 <body>
@@ -36,16 +49,16 @@ $five = array_slice($question,43,5,true);
 $all = array('first'=>$first,'second'=>$second,'third'=>$third,'four'=>$four,'five'=>$five);
 foreach($all as $p=>$q){
 ?>
-<div class="{$p}">
+<div id="{$p}">
 <?php foreach($q as $k=>$v){ ?>
-<div >
+<div class="content <?php if($k%2 == 0){echo "odd";}else{echo "even";}?>">
 <p class="question">{$v['id']}.{$v['Question']}</p>
 	<div class="User_ratings User_grade" id="div_fraction0">
-A.{$v['Aoption']}<br />
-B.{$v['Boption']}
+<p>A.{$v['Aoption']}</p>
+<p>B.{$v['Boption']}</p>
 	<div class="ratings_bars">       
     		<span class="bars_10">A</span>
-			<span id="title_A{$v['id']}" class="title">0</span>
+			<span id="title_A{$v['id']}" class="title">2.5</span>
 
 			<div class="scale" id="bar_A{$v['id']}">
 				<div id="div_A{$v['id']}"></div>
@@ -53,21 +66,22 @@ B.{$v['Boption']}
 			</div>
             
             <span class="bars_10">B</span>
-			<span id="title_B{$v['id']}" class="title">0</span>
+			<span id="title_B{$v['id']}" class="title">2.5</span>
 	</div>
 	</div>
-   <p style="margin-top:100px;"></p>
-</div>
-<?php }?>
-<br />
-<p style="margin-top:100px;"></p>
-<input type="button" value="下一组" class="layui-btn next" style="float:right"/>
-<input type="button" value="上一组" class="layui-btn back" style="float:left"/>
-<input type="button" value="提&nbsp;&nbsp;&nbsp;交" id="submit" class="layui-btn layui-btn-normal submit" style="float:right;display:none;"/>
 </div>
 <?php }?>
 </div>
-   <p style="margin-top:120px;"></p>
+<?php }?>
+
+<hr>
+<input type="button" value="下一组" class="layui-btn next" style="float:right;margin-top:50px;"/>
+<input type="button" value="上一组" class="layui-btn back" style="float:left;margin-top:50px;"/>
+<input type="button" value="提&nbsp;&nbsp;&nbsp;交" id="submit" class="layui-btn layui-btn-normal submit" style="float:right;display:none;margin-top:50px;"/>
+
+</div>
+<hr style="margin-top:200px;">
+
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 </script>
 <script type="text/javascript">
@@ -110,10 +124,11 @@ scale.prototype = {
 $(function(){  
    issues();
    $('.back').hide();
-   $('.second').hide();
-   $('.third').hide();
-   $('.four').hide();
-   $('.five').hide();
+   $('#first').attr("class","tag-show");
+   $('#second').hide();
+   $('#third').hide();
+   $('#four').hide();
+   $('#five').hide();
    $('#submit').hide();
 });  
 function issues(){
@@ -139,7 +154,7 @@ $('.submit').click(function(){
 	
 });
 $('.next').click(function(){
-	var tmpa=$(this).parent().attr("class");
+	var tmpa=$('.tag-show').attr("id");
 	var tmpb,width,n;
 	switch(tmpa)
 	{
@@ -154,12 +169,14 @@ $('.next').click(function(){
 	}
 	$("#progressBar div span").css("width",width);
 	$("#progressBar>span:nth-child("+ n +")").css("background","#00BFFF");
-	$( "."+ tmpa +"" ).toggle( "drop" );
-	$( "."+ tmpb +"" ).show();
+	$( "#"+ tmpa +"" ).attr("class","");
+	$( "#"+ tmpa +"" ).toggle("blind");
+	$( "#"+ tmpb +"" ).show();
+	$( "#"+ tmpb +"" ).attr("class","tag-show");
 	$('body').animate( {scrollTop: 0}, 500);
 });
 $('.back').click(function(){
-	var tmpa=$(this).parent().attr("class");
+	var tmpa=$('.tag').attr("id");
 	var tmpb,width,n;
 	switch(tmpa)
 	{
@@ -174,9 +191,10 @@ $('.back').click(function(){
 	}	
 	$("#progressBar div span").css("width",width);
 	$("#progressBar>span:nth-child("+ n +")").css("background","#ccc");
-	$( "."+ tmpa +"" ).toggle( "drop" );
-	//$( "."+ tmpa +"" ).effect( "Explode", "slow");
-	$( "."+ tmpb +"" ).show();
+	$( "#"+ tmpa +"" ).attr("class","");
+	$( "#"+ tmpa +"" ).toggle( "blind" );
+	$( "#"+ tmpb +"" ).show();
+	$( "#"+ tmpb +"" ).attr("class","tag-show");
 	$('body').animate( {scrollTop: 0}, 500);
 });
 </script>
