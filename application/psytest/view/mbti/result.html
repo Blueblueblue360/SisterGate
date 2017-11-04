@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MBTI测试结果</title>
+<style>
+.grade_warp{width:818px;margin:10px auto 15px auto;}
+.footnote{text-align:center;font-size:9px;color:#aaaaaa;margin:50px auto 10px auto;}
+.title{text-align:center;font-family:Verdana, Geneva, sans-serif;}
+
+h3{}
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 3px solid #2F4F4F;
+	padding:10px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="grade_warp">
+<h1 class="title">MBTI测评报告</h1>
+<h3 style="float:left">测试人：</h3><h3 style="float:right">测试时间 :   年   月   日</h3>
+
+<div style="width:840px;border-bottom:3px solid #000;margin-top:80px;"></div>
+<p>您的MBTI性格类型测试结果为<span style="font-family:'Comic Sans MS', cursive, sans-serif">{$result['lx']}（{$result['explain']}）型——{$result['tip']}。</span>具体描述如下表：</p>
+<table>
+<tr><th colspan="2" style="width:70px;"><p>思维方式</p></th><td>{$result['mindset']}</td></tr>
+<tr><th rowspan="2" style="width:70px;"><p>个性</p></th><th style="width:50px;">已知</th><td>{$result['personality_known']}</td></tr>
+<tr><th style="width:50px;">盲点</th><td>{$result['personality_blind']}</td></tr>
+<tr><th rowspan="2" style="width:70px;"><p>工作</p></th><th style="width:50px;">优势</th><td>{$result['job_adv']}</td></tr>
+<tr><th style="width:50px;">劣势</th><td>{$result['job_dis']}</td></tr>
+<tr><th colspan="2" style="width:70px;"><p>适合的工作岗位与环境</p></th><td>{$result['position_envir']}</td></tr>
+<tr><th colspan="2" style="width:70px;"><p>领导风格</p></th><td>{$result['leadstyle']}</td></tr>
+<tr><th colspan="2" style="width:70px;"><p>职业选择</p></th><td>{$result['career']}</td></tr>
+<tr><th colspan="2" style="width:70px;"><p>个人发展建议</p></th><td>{$result['advice']}</td></tr>
+<tr><th colspan="2" style="width:70px;"><p>备注</p></th><td>	图表中的选择或建议是根据该性格人所看中的工作特质所给出，以期达到职业满足。</td></tr>
+
+</table>
+
+<h4 class="footnote">此报告仅供职业选择参考，不负法律责任，最终解释权归@指明网所有。</h4>
+
+</div>
+
+</body>
+</html>

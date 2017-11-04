@@ -2,201 +2,49 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>性格类型测评</title>
-<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<title>欢迎测评！</title>
+
 <link type="text/css" href="/statics/css/layui.css" rel="stylesheet" />
-<link type="text/css" href="/statics/css/progressBar.css" rel="stylesheet" />
+
 <style>
 body{
-
+		
 }
-.content{
-	background-color:#CCC; 
-	padding:10px 5px 0px 20px;
-	margin-top:40px;	
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
-	border-radius: 25px;
-}
-.odd{
-	float:left;
-}
-.even{
-	float:right;
+.grade_warp{
+	margin:150px auto auto auto;width:1020px;text-align:center;
 }
 </style>
 </head>
 <body>
+<div style="background-color:#383838;width:100%;height:44px;position:absolute;top:0px;">
+<ul style="margin:10px auto auto auto;width:1020px;text-align:center;">
+<li style="margin-left:0px;float:left;"><a href="/"><image src="/statics/images/plane.png" width="25px" height="25px"/></a></li>
+<li style="margin-left:80px;float:left;margin-top:5px;"><a href="/index.php/psytest/mbti/index" style="color:#fff;font-family:Arial, Helvetica, sans-serif;font-size:14px;">MBTI</a></li>
+<li style="margin-left:780px;float:left;"><a ><image src="/statics/images/123.png" width="25px" height="25px"/></a></li>
+<li style="margin-left:50px;float:left;margin-top:3px;"><a ><image src="/statics/images/wechat.png" width="25px" height="20px"/></a></li></ul>
+</div>
+
 <div class="grade_warp">
-<div id="progressBar">
-     <!-- 进度条 -->
-     <div>
-         <span></span>
-     </div>
-     <!-- 五个圆 -->
-     <span></span>
-     <span></span>
-     <span></span>
-     <span></span>
-     <span></span>
+<p style="font-size:60px;font-family:'叶根友毛笔行书2.0版';">知己知彼，百战不殆</p>
+<div style="margin-top:300px;">
+<p style="text-align:center;margin-bottom:25px;color:#999;font-family:Arial, Helvetica, sans-serif;font-size:22px;font-weight:bold;">每一个人都是宝藏。</p>
+<a id="begin" style="font-family:Arial, Helvetica, sans-serif;color:#1E90FF;font-size:30px;">开始测评&nbsp;></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a id="about" style="font-family:Arial, Helvetica, sans-serif;color:#1E90FF;font-size:30px;">了解我们&nbsp;></a>
 </div>
 
-<?php $first = array_slice($question,0,9,true);
-$second = array_slice($question,9,14,true);
-$third = array_slice($question,23,7,true);
-$four = array_slice($question,30,13,true);
-$five = array_slice($question,43,5,true);
-$all = array('first'=>$first,'second'=>$second,'third'=>$third,'four'=>$four,'five'=>$five);
-foreach($all as $p=>$q){
-?>
-<div id="{$p}">
-<?php foreach($q as $k=>$v){ ?>
-<div class="content <?php if($k%2 == 0){echo "odd";}else{echo "even";}?>">
-<p class="question">{$v['id']}.{$v['Question']}</p>
-	<div class="User_ratings User_grade" id="div_fraction0">
-<p>A.{$v['Aoption']}</p>
-<p>B.{$v['Boption']}</p>
-	<div class="ratings_bars">       
-    		<span class="bars_10">A</span>
-			<span id="title_A{$v['id']}" class="title">2.5</span>
-
-			<div class="scale" id="bar_A{$v['id']}">
-				<div id="div_A{$v['id']}"></div>
-				<span id="btn_A{$v['id']}"></span>
-			</div>
-            
-            <span class="bars_10">B</span>
-			<span id="title_B{$v['id']}" class="title">2.5</span>
-	</div>
-	</div>
+<div style="width:840px;border-bottom:1px solid #D8D8D8;position:absolute;bottom:50px;"></div>
+<p style="position:absolute;bottom:30px;color:#888888;font-size:5px;">Copyright © 2017 sistergate.com &nbsp;&nbsp;&nbsp;保留所有权利。
+<a style="margin-left:50px;font-size:5px;" href="">隐私政策</a>
+<span style="color:#CCC;margin-left:10px;margin-right:10px;">|</span>
+<a style="font-size:5px;" href="">使用条款</a>
+<span style="color:#CCC;margin-left:10px;margin-right:10px;">|</span>
+<a style="font-size:5px;" href="">法律信息</a>
+<span style="color:#CCC;margin-left:10px;margin-right:10px;">|</span>
+<a style="font-size:5px;" href="">网站地图</a>
+<a style="margin-left:300px;"><image src="/statics/images/China.png" width="15px" height="15px" style="margin-right:5px;"/>中国</a>
+</p>
+<p style="position:absolute;margin-top:10px;bottom:10px;color:#888888;font-size:5px;"> 陕ICP备17016501</p>
 </div>
-<?php }?>
-</div>
-<?php }?>
 
-<hr>
-<input type="button" value="下一组" class="layui-btn next" style="float:right;margin-top:50px;"/>
-<input type="button" value="上一组" class="layui-btn back" style="float:left;margin-top:50px;"/>
-<input type="button" value="提&nbsp;&nbsp;&nbsp;交" id="submit" class="layui-btn layui-btn-normal submit" style="float:right;display:none;margin-top:50px;"/>
-
-</div>
-<hr style="margin-top:200px;">
-
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-</script>
-<script type="text/javascript">
-scale = function (num) {
-	this.btn = document.getElementById("btn_"+num);
-	this.bar = document.getElementById("bar_"+num);
-	this.title = document.getElementById("title_"+num);
-	this.step = this.bar.getElementsByTagName("DIV")[0];
-	//this.step = document.getElementById("div_"+num);;
-	this.num = num;
-	this.init();
-};
-scale.prototype = {
-	init: function () {
-		var f = this, g = document, b = window, m = Math , n = this.num;
-		f.btn.onmousedown = function (e) {
-			var x = (e || b.event).clientX;
-			var l = this.offsetLeft;
-			var max = f.bar.offsetWidth - this.offsetWidth;
-			g.onmousemove = function (e) {
-				var thisX = (e || b.event).clientX;
-				var to = m.min(max, m.max(-2, l + (thisX - x)));
-				f.btn.style.left = to + 'px';
-				f.ondrag(m.round(m.max(0, to / max) * 10), to , n);
-				b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
-			};
-			g.onmouseup = new Function('this.onmousemove=null');
-		}; 
-	},
-	ondrag: function (pos, x ,n) {
-		this.step.style.width = Math.max(0, x) + 'px';
-		this.title.innerHTML = pos /2 + '';
-		var m = n.replace("A","B");
-		var to = 200 - Math.max(0, x);
-		var html =( 10 - pos )/ 2+ '';
-		$("#title_"+m).html(html);
-	}
-}
-
-$(function(){  
-   issues();
-   $('.back').hide();
-   $('#first').attr("class","tag-show");
-   $('#second').hide();
-   $('#third').hide();
-   $('#four').hide();
-   $('#five').hide();
-   $('#submit').hide();
-});  
-function issues(){
-	for(var i=1;i<49;i++){
-	   new scale('A'+i);
-   }
-}
-$('.submit').click(function(){
-	var Ascore =[];
-	var Bscore =[];
-	for(var j=1;j<49;j++){
-		Ascore[j] = $("#title_A"+j).html();
-		Bscore[j] = $("#title_B"+j).html();
-	}
-	$.post('/index.php/index/index/deal',
-	{
-		a:Ascore,
-		b:Bscore
-	},
-		function(data,status){
-        	alert("您的测试结果: \n" + data);
-    });
-	
-});
-$('.next').click(function(){
-	var tmpa=$('.tag-show').attr("id");
-	var tmpb,width,n;
-	switch(tmpa)
-	{
-		case "first":tmpb = "second";width = "25%";n=2;$('.back').show();
-		break;
-		case "second":tmpb = "third";width = "50%";n=3;
-		break;
-		case "third":tmpb = "four";width = "75%";n=4;
-		break;
-		case "four":tmpb = "five";width = "100%";n=5;$('.next').hide();$('.submit').show();
-		break;
-	}
-	$("#progressBar div span").css("width",width);
-	$("#progressBar>span:nth-child("+ n +")").css("background","#00BFFF");
-	$( "#"+ tmpa +"" ).attr("class","");
-	$( "#"+ tmpa +"" ).toggle("blind");
-	$( "#"+ tmpb +"" ).show();
-	$( "#"+ tmpb +"" ).attr("class","tag-show");
-	$('body').animate( {scrollTop: 0}, 500);
-});
-$('.back').click(function(){
-	var tmpa=$('.tag').attr("id");
-	var tmpb,width,n;
-	switch(tmpa)
-	{
-		case "second":tmpb = "first";width = "0%";n=2;$('.back').hide();
-		break;
-		case "third":tmpb = "second";width = "25%";n=3;
-		break;
-		case "four":tmpb = "third";width = "50%";n=4;
-		break;
-		case "five":tmpb = "four";width = "75%";n=5;$('.next').show();$('.submit').hide();
-		break;
-	}	
-	$("#progressBar div span").css("width",width);
-	$("#progressBar>span:nth-child("+ n +")").css("background","#ccc");
-	$( "#"+ tmpa +"" ).attr("class","");
-	$( "#"+ tmpa +"" ).toggle( "blind" );
-	$( "#"+ tmpb +"" ).show();
-	$( "#"+ tmpb +"" ).attr("class","tag-show");
-	$('body').animate( {scrollTop: 0}, 500);
-});
-</script>
 </body>
 </html>
