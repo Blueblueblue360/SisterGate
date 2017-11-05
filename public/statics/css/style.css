@@ -6,7 +6,7 @@ ul{list-style:none;}
 /*用户评分*/
 .grade_warp{width:818px;margin:10px auto 15px auto;}
 .question{font-family:"微软雅黑","宋体";font-size:24px;margin-bottom:15px;letter-spacing:1px;}
-.User_grade{width:507px;margin: auto 20px 0px auto;overflow:hidden;float:left;font-family:"微软雅黑","宋体";font-size:20px;line-height: 2;letter-spacing:1px;}
+.User_grade{width:527px;margin: auto 20px 0px auto;overflow:hidden;float:left;font-family:"微软雅黑","宋体";font-size:20px;line-height: 2;letter-spacing:1px;}
 .User_ratings .ratings_bars{width:407px;height:54px;margin-top:10px;float:left;}
 .User_ratings .ratings_bars .title{width:50px;height:30px;text-align:center;border:1px solid #bfbebe;line-height:25px;font-family:Georgia, "Times New Roman", Times, serif;font-size:20px;float:left;color:#a0a0a0;background:#fff;}
 
