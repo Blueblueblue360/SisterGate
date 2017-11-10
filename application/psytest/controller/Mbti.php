@@ -53,8 +53,7 @@ class Mbti extends Controller
 	}
 	public function analyze()
 	{	
-		//$lx = input('get.lx');
-		$lx = 'INFJ';
+		$lx = input('get.lx');
 		$result = M('mydb.mbti_answer')->where('lx',$lx)->find();
 		$this->assign('result',$result);
 		return $this->fetch('result');
