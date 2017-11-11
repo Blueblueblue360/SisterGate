@@ -9,6 +9,12 @@ class Mbti extends Controller
 		$this->assign('question',$question);
 		return $this->fetch();
     }
+	public function question()
+	{
+		$question = M('mbti')->select();
+		$this->assign('question',$question);
+		return $this->fetch();
+	}
 	public function deal()
 	{
 		$a = input('post.a/a');

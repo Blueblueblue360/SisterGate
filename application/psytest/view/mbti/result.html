@@ -29,6 +29,9 @@ th{
     font-weight:bold;
     margin:3px;
 }
+span{
+	font-weight:bold;
+}
 #loading{
   background-color: #1E90FF; 
   height: 100%;
@@ -220,7 +223,7 @@ th{
 <h3 style="float:left">测试人：</h3><h3 style="float:right">测试时间 : <?php echo $testTime=date("Y年m月d日");?></h3>
 
 <div style="width:840px;border-bottom:3px solid #000;margin-top:80px;"></div>
-<p class="indent" style="margin:10px;">您的MBTI性格类型测试结果为<span style="font-weight:bold;">{$result['lx']}（{$result['explain']}）型——{$result['tip']}</span>。具体描述如下表：</p>
+<p class="indent" style="margin:10px;">您的MBTI性格类型测试结果为<span>{$result['lx']}（{$result['explain']}）型</span>——<span>{$result['tip']}</span>。具体描述如下表：</p>
 <table>
 <tr><th colspan="2" style="width:70px;"><p>思维方式</p></th><td class="indent">{$result['mindset']}</td></tr>
 <tr><th rowspan="2" style="width:70px;"><p>个性</p></th><th style="width:50px;">已知</th><td class="indent">{$result['personality_known']}</td></tr>
