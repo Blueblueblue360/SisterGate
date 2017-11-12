@@ -4,34 +4,6 @@
 <meta charset="utf-8">
 <title>MBTI测试结果</title>
 <style>
-.grade_warp{width:840px;margin:10px auto 15px auto;}
-.footnote{text-align:center;font-size:9px;color:#aaaaaa;margin:50px auto 10px auto;}
-.title{text-align:center;font-family:Verdana, Geneva, sans-serif;}
-
-h3{}
-table {
-    border-collapse: collapse;
-}
-
-td, th {
-    border: 3px solid #2F4F4F;
-	padding:10px;
-}
-th{
-    background-color: #cccccc;
-}
-.indent{
-    text-indent: 2em; 
-    letter-spacing:2px;
-    margin:3px;
-}
-.career-title{
-    font-weight:bold;
-    margin:3px;
-}
-span{
-	font-weight:bold;
-}
 #loading{
   background-color: #1E90FF; 
   height: 100%;
@@ -184,13 +156,53 @@ span{
 	transform: translate(-100px,0);
 	}
 }
+.back-ground{
+	width:100%;
+   height:100%;
+   position: relative;
+   margin: 0 auto;
+   overflow: auto;
+   background-image: url(/statics/images/LOGO_BACK.png)
+}
+.grade_warp{width:840px;margin:10px auto 15px auto;}
+.foot-note{text-align:center;font-size:9px;color:#aaaaaa;margin:50px auto 10px auto;}
+.title{text-align:center;font-family:Verdana, Geneva, sans-serif;font-size: 24px;}
+h3{
+	font-size: 17px;
+}
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 3px solid #2F4F4F;
+	padding: 10px;
+}
+p{
+	margin: 3px;
+}
+th{
+    background-color: #cccccc;
+}
+.indent{
+    text-indent: 2em; 
+    letter-spacing:2px;
+    margin:3px;
+}
+.career-title{
+    font-weight:bold;
+    margin:3px;
+}
+span{
+	font-weight:bold;
+}
 </style>
 </head>
 <body>
     
 <div id="loading">
 		<div id="loading-center">
-            <div style="width:500px;margin:100px auto 0px auto;text-align:center;font-size: 30px;color:#fff;font-weight: bold;">指明精灵正在为您分析测试结果<br />请稍候</div> 
+            <div style="width:500px;margin:100px auto 0px auto;text-align:center;font-size: 27px;color:#fff;font-weight: bold;font-family: '微软雅黑';letter-spacing: 2px;">指明精灵正在为您分析测试结果<br />请稍候</div> 
 			<div id="loading-center-absolute-one">
 				<div class="object-one"></div>
 				<div class="object-one"></div>
@@ -214,18 +226,17 @@ span{
 				<div class="object-two"></div>
 			</div>
 		</div>
-	</div>
 </div>
 
-
+<div class="back-ground">
 <div class="grade_warp">
 <h1 class="title">MBTI测评报告</h1>
-<h3 style="float:left">测试人：</h3><h3 style="float:right">测试时间 : <?php echo $testTime=date("Y年m月d日");?></h3>
+<h3 style="float:left">测试人：<input type="text" id="tester" name="tester"/></h3><h3 style="float:right">测试时间 : <?php echo date("Y年m月d日");?></h3>
 
 <div style="width:840px;border-bottom:3px solid #000;margin-top:80px;"></div>
-<p class="indent" style="margin:10px;">您的MBTI性格类型测试结果为<span>{$result['lx']}（{$result['explain']}）型</span>——<span>{$result['tip']}</span>。具体描述如下表：</p>
+<p class="indent" style="margin-top:30px;margin-bottom:20px;">您的MBTI性格类型测试结果为<span>{$result['lx']}（{$result['explain']}）型</span>——<span>{$result['tip']}</span>。具体描述如下表：</p>
 <table>
-<tr><th colspan="2" style="width:70px;"><p>思维方式</p></th><td class="indent">{$result['mindset']}</td></tr>
+<tr><th colspan="2" style="width:70px;padding:5px;"><p>思维方式</p></th><td class="indent">{$result['mindset']}</td></tr>
 <tr><th rowspan="2" style="width:70px;"><p>个性</p></th><th style="width:50px;">已知</th><td class="indent">{$result['personality_known']}</td></tr>
 <tr><th style="width:50px;">盲点</th><td class="indent">{$result['personality_blind']}</td></tr>
 <tr><th rowspan="2" style="width:70px;"><p>工作</p></th><th style="width:50px;">优势</th><td class="indent">{$result['job_adv']}</td></tr>
@@ -234,18 +245,19 @@ span{
 <tr><th colspan="2" style="width:70px;"><p>领导风格</p></th><td class="indent">{$result['leadstyle']}</td></tr>
 <tr><th colspan="2" style="width:70px;"><p>职业选择</p></th><td>{$result['career']}</td></tr>
 <tr><th colspan="2" style="width:70px;"><p>个人发展建议</p></th><td class="indent">{$result['advice']}</td></tr>
-<tr><th colspan="2" style="width:70px;"><p>备注</p></th><td class="indent">图表中的选择或建议是根据该性格人所看中的工作特质所给出，以期达到职业满足。</td></tr>
+<tr><th colspan="2" style="width:70px;"><p>备注</p></th><td>图表中的选择或建议是根据该性格人所看中的工作特质所给出，以期达到职业满足。</td></tr>
 
 </table>
 
-<h4 class="footnote">此报告仅供职业选择参考，不负法律责任，最终解释权归@指明网所有。</h4>
+<h4 class="foot-note">此报告仅供职业选择参考，不负法律责任，最终解释权归@指明网所有。</h4>
 
+</div>
 </div>
 
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 $(window).load(function() {
-    $("#loading").delay(3000).fadeOut();
+    $("#loading").delay(1000).fadeOut();
 })    
 </script>
 </body>
