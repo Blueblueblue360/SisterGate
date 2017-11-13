@@ -112,11 +112,11 @@ scale.prototype = {
 	},
 	ondrag: function (pos, x ,n) {
 		this.step.style.width = Math.max(0, x) + 'px';
-		this.title.innerHTML = pos /2 + '';
+		var A=pos /2 + '';
+		var B=( 10 - pos )/ 2+ '';
+		this.title.innerHTML = B;
 		var m = n.replace("A","B");
-		var to = 200 - Math.max(0, x);
-		var html =( 10 - pos )/ 2+ '';
-		$("#title_"+m).html(html);
+		$("#title_"+m).html(A);
 	}
 }
 
@@ -174,7 +174,7 @@ $('.next').click(function(){
 	$( "#"+ tmpa +"" ).toggle("blind");
 	$( "#"+ tmpb +"" ).show();
 	$( "#"+ tmpb +"" ).attr("class","tag-show");
-	$('body').animate( {scrollTop: 0}, 500);
+	$('body,html').animate({'scrollTop':0},1);
 });
 $('.back').click(function(){
 	var tmpa=$('.tag-show').attr("id");
@@ -196,7 +196,7 @@ $('.back').click(function(){
 	$( "#"+ tmpa +"" ).toggle( "blind" );
 	$( "#"+ tmpb +"" ).show();
 	$( "#"+ tmpb +"" ).attr("class","tag-show");
-	$('body').animate( {scrollTop: 0}, 500);
+	$('body,html').animate({'scrollTop':0},1);
 });
 </script>
 </body>
