@@ -1,7 +1,7 @@
 <?php
 namespace app\psytest\controller;
 use think\Controller;
-class Mbti extends Controller
+class Pf extends Controller
 {
     public function index()
     {
@@ -9,7 +9,7 @@ class Mbti extends Controller
     }
 	public function question()
 	{
-		$question = M('mbti')->select();
+		$question = M('pf')->select();
 		$this->assign('question',$question);
 		return $this->fetch();
 	}
