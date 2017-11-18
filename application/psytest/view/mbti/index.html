@@ -5,17 +5,30 @@
 <title>MBTI</title>
 <link type="text/css" href="/statics/css/layui.css" rel="stylesheet" />
 <style>
-	
+#back-ground{
+	width: 100%;
+	height:100%;
+    position: absolute;
+    margin: 44px auto auto auto;
+    overflow: auto;	
+	background-image: url(/statics/images/mbti.jpg);
+}	
 .grade_warp{
-	margin:44px auto 80px auto;
+	margin:0 auto 80px auto;
 	width:1020px;
 	text-align: center;
+}
+.grade_warp2{
+	position: absolute;
+	margin:844px auto 20px auto;
+	left:50%;
+	margin-left:-510px;
 }
 li:hover {opacity:0.7;filter(alpha=70)}
 a.under:hover {text-decoration:underline;}
 a{text-decoration:none;letter-spacing: 1px;}
 .selected{
-	opacity:0.7;filter(alpha=70)
+	opacity:0.7;filter(alpha=70);
 }
 </style>
 <body>
@@ -27,17 +40,23 @@ a{text-decoration:none;letter-spacing: 1px;}
 		<li style="margin-left:600px;float:left;"><a ><img src="/statics/images/123.png" width="20px" height="20px"/></a></li>
 		<li style="margin-left:80px;float:left;margin-top:-5px;"><a ><img src="/statics/images/weixin.png" width="33px" height="33px"/></a></li></ul>
 </div>	
+
+<div id="back-ground">
 <div class="grade_warp">
 <p style="margin-top:15px;margin-bottom:50px;color:#00001f;font-family:Arial, Helvetica, sans-serif;font-size:21px;float:left;">MBTI	
-	<a></a><a></a><a></a><a id="begin" href="/index.php/psytest/mbti/question" class="layui-btn layui-btn-mini layui-btn-normal" style="margin-left:920px;">测评</a></p>
+	<a></a><a></a><a></a><a id="begin" href="/index.php/psytest/mbti/question" class="layui-btn layui-btn-mini layui-btn-normal" style="margin-left:927px;">测评</a></p>
 
-<div style="width:1020px;border-bottom:1px solid #D8D8D8;margin-top:55px;position:absolute"></div>
+<div style="width:1020px;border-bottom:1px solid rgb(130, 130, 130);margin-top:55px;position:absolute"></div>
 
-<h2>这里是标题</h2>
-<h4>这里是简介</h4>
-<img src="/statics/images/mbti.jpg" width="960" height="540" />
-<h4>这里是详细介绍</h4>
+<p style="color:#fff;font-size:29px;text-align:left;">这里是标题</p>
+<p style="color:#fff;font-size:29px;text-align:left;">这里是简介</p>
 
+<p style="color:#fff;font-size:29px;text-align:left;">这里是详细介绍</p>
+
+</div>
+</div>
+
+<div class="grade_warp2">
 <div style="width:1020px;border-bottom:1px solid #D8D8D8;margin-top:120px;"></div>
 <p style="margin-top:10px;color:#888888;font-size:5px;float:left;">Copyright © 2017 sistergate.com &nbsp;&nbsp;&nbsp;保留所有权利。
 <a style="margin-left:50px;font-size:5px;" href="" class="under">隐私政策</a>
@@ -51,6 +70,7 @@ a{text-decoration:none;letter-spacing: 1px;}
 </p>
 <p style="margin-top:10px;color:#888888;font-size:5px;float:left;margin-right:800px;"> 陕ICP备17016501</p>
 </div>
+
 
 </body>
 </html>

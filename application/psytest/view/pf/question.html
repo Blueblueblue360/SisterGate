@@ -20,13 +20,13 @@ a{
 button{
     margin-top:50px; 
 }
-.back{
-    
+#back_1{
+    display: none;
 }
 
 </style>
 <body>
-
+<img src="/statics/images/123.png" />
 <div class="grade_warp">
 <?php foreach($question as $k=>$v){ ?>
     <div id="{$v['id']}" class="question">
@@ -34,6 +34,7 @@ button{
     <a class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm">A.{$v['Aoption']}</a>
     <a class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm">B.{$v['Boption']}</a>
     <a class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm">C.{$v['Coption']}</a>
+    <input type="hidden" id="option_{$v['id']}" value="" />
     <br/>
     </div>
 <?php }?>
@@ -45,11 +46,20 @@ $(function(){
     $('#1').show();
 }) 
 $('a').click(function(){
+    var index = $(this).index();
+    $(this).parent().children('a').prop('class','layui-btn layui-btn-lg layui-btn-radius layui-btn-warm');
+    $(this).parent().children('input').val(index);
+    $(this).prop('class','layui-btn layui-btn-lg layui-btn-radius');
     var id =$(this).parent('div').prop('id');
-    $('#'+id).hide();
-    var i = parseInt(id) +1;
-    $('.back').prop("id","back_"+i);
-    $('#'+i).show();
+    setTimeout(function(){
+        if(id == "1"){
+            $('#back_1').css("display","block");
+        }
+        $('#'+id).hide();
+        var i = parseInt(id) +1;
+        $('.back').prop("id","back_"+i);
+        $('#'+i).show();
+    },400)
 });
 $('.back').click(function(){
     var str =$(this).prop('id');
@@ -58,6 +68,9 @@ $('.back').click(function(){
     var i = parseInt(id) -1;
     $('.back').prop('id',"back_"+i);
     $('#'+i).show();
+    if(i == "1"){
+        $('#back_1').css("display","none");
+    }
 });
 </script>
 </body>
