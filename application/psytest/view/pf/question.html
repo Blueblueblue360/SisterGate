@@ -5,8 +5,14 @@
 <title>16PF</title>
 <link type="text/css" href="/statics/css/layui.css" rel="stylesheet" />
 <style>
+body{
+    background-color: #FFCCCC;
+}
 .grade_warp{
-	margin:100px auto auto auto;width:720px;
+    position: absolute;
+	margin:200px auto auto auto;
+    left: 50%;
+    margin-left:-390px;
 }
 .question{
     display: none;
@@ -15,7 +21,7 @@ p{
     margin-bottom: 50px;
 }
 a{
-    margin-right:50px;
+    margin-right:70px;
 }
 button{
     margin-top:50px; 
@@ -26,7 +32,6 @@ button{
 
 </style>
 <body>
-<img src="/statics/images/123.png" />
 <div class="grade_warp">
 <?php foreach($question as $k=>$v){ ?>
     <div id="{$v['id']}" class="question">

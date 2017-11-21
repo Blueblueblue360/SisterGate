@@ -4,9 +4,18 @@
 <meta charset="utf-8">
 <title>16PF</title>
 <link type="text/css" href="/statics/css/layui.css" rel="stylesheet" />
+<link type="text/css" href="/statics/css/animate.css" rel="stylesheet" />
 <style>
+.recommend{
+	animation-duration: 2s;
+	animation-delay: 1s;
+}	
+.pic{
+	animation-duration: 2s;
+	animation-delay: 2.5s;
+}
 .grade_warp{
-	margin:44px auto 80px auto;
+	margin:180px auto 80px auto;
 	width:1020px;
 	text-align: center;
 }
@@ -34,16 +43,19 @@ a{text-decoration:none;letter-spacing: 1px;}
 		<li style="margin-left:80px;float:left;margin-top:-5px;"><a ><img src="/statics/images/weixin.png" width="33px" height="33px"/></a></li></ul>
 </div>
 
+<div style="width:100%;height:44px;position:absolute;top:44px;z-index:1;background-color:#fff;" id="subtitle">
+		<div style="margin:0 auto 0 auto;width:1020px;text-align: center;">
+		<p style="margin-top:15px;margin-bottom:50px;color:#000;font-family:Arial, Helvetica, sans-serif;font-size:21px;float:left;">16PF	
+		<a></a><a></a><a></a><a id="begin" href="/index.php/psytest/pf/question" class="layui-btn layui-btn-mini layui-btn-normal" style="margin-left:900px;">开始测评</a></p>
+		<div style="width:1020px;border-bottom:1px solid rgb(130, 130, 130);top:44px;position:relative"></div>
+		</div> 	
+</div>
+
 <div class="grade_warp">
-<p style="margin-top:15px;margin-bottom:50px;color:#00001f;font-family:Arial, Helvetica, sans-serif;font-size:21px;float:left;">16PF	
-	<a></a><a></a><a></a><a id="begin" href="/index.php/psytest/pf/question" class="layui-btn layui-btn-mini layui-btn-normal" style="margin-left:927px;">测评</a></p>
+<p style="color:#000;font-size:27px;text-align:center;margin-top:50px;" class="fadeInUp animated recommend">这里是标题</p>
+<p style="color:#000;font-size:34px;text-align:center;" class="fadeInUp animated recommend">这里是简介</p>
 
-<div style="width:1020px;border-bottom:1px solid rgb(130, 130, 130);margin-top:55px;position:absolute"></div>
-
-<p style="color:#000;font-size:27px;text-align:center;">这里是标题</p>
-<p style="color:#000;font-size:34px;text-align:center;">这里是简介</p>
-
-<img src="/statics/images/pf.jpg" width="1020px" height="574px" style="margin:80px 0 50px 0"/>
+<img src="/statics/images/pf.jpg" width="1020px" height="574px" style="margin:80px 0 50px 0" class="fadeIn animated pic"/>
 
 <p style="color:#000;font-size:19px;text-align:center;width:730px;margin: auto auto auto auto;letter-spacing: 1px;line-height:2">本测验共有187道题目，都是有关个人的兴趣和态度等问题。对问题的如何回答，并没有“对”与“不对”之分，只是表明你对这些问题的态度，请你要尽量表达个人的意见，不要有顾忌。
     应当记住的是： 1、尽量不要选择中性答案
@@ -65,6 +77,23 @@ a{text-decoration:none;letter-spacing: 1px;}
 </p>
 <p style="margin-top:10px;color:#888888;font-size:5px;float:left;margin-right:800px;"> 陕ICP备17016501</p>
 </div>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+window.onscroll=function()
+{
+	var ScrollBar = $(document).scrollTop();
+	if (ScrollBar > 44) {
+	  $('#subtitle').css('position',"fixed");
+	  $('#subtitle').css('top',"0px");
+	  
+	}else{
+	  $('#subtitle').css('position',"absolute");
+	  $('#subtitle').css('top',"44px");
+	
+	}
+}
+</script>
 
 </body>
 </html>
