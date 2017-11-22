@@ -6,6 +6,7 @@
 <link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
 <link type="text/css" href="/statics/css/layui.css" rel="stylesheet" />
 <link type="text/css" href="/statics/css/progressBar.css" rel="stylesheet" />
+<link type="text/css" href="/statics/css/clock.css" rel="stylesheet" />
 <style>
 body{
 	background-color:#CFFFFF; 
@@ -24,9 +25,42 @@ body{
 .even{
 	float:right;
 }
+.watch{
+	position: fixed;
+	top: 50px;
+	left: 50px;
+	z-index: 1;
+}
 </style>
 </head>
 <body>
+
+<div class="watch">
+  <div class="face">
+    <div class="numbers">
+      <div class="number number-1"> <span>1</span></div>
+      <div class="number number-2"> <span>2</span></div>
+      <div class="number number-3"> <span>3</span></div>
+      <div class="number number-4"> <span>4</span></div>
+      <div class="number number-5"> <span>5</span></div>
+      <div class="number number-6"> <span>6</span></div>
+      <div class="number number-7"> <span>7</span></div>
+      <div class="number number-8"> <span>8</span></div>
+      <div class="number number-9"> <span>9</span></div>
+      <div class="number number-10"> <span>10</span></div>
+      <div class="number number-11"> <span>11</span></div>
+      <div class="number number-12"> <span>12</span></div>
+    </div>
+    <div class="arms">
+      <div class="arm arm-hour"></div>
+      <div class="arm arm-minute"></div>
+      <div class="arm arm-second">
+        <div class="body"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="grade_warp">
 <div id="progressBar">
      <!-- 进度条 -->
