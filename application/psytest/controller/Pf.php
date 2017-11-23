@@ -16,6 +16,7 @@ class Pf extends Controller
 	public function deal()
 	{
 		$score = input('post.score/a');
+		$sex = input('post.sex');//1是男，2是女
 		$A =0;$B =0;$C =0;$E =0;$F =0;$G =0;$H =0;$I =0;$L =0;$M =0;$N =0;$O =0;$Q1 =0;$Q2 =0;$Q3 =0;$Q4 =0;		
 		//A:3.26.27.51.52.76.101.126.151.176.   // 3,52,101,126,176
 		//B:28.53.54.77.78.102.103.127.128.152.153.177.178.180.	
@@ -59,20 +60,13 @@ class Pf extends Controller
 				$score[$k] = abs($v-2);
 			}
 		}
-		/*
-		28.B 53.B 54.B 77.C 78.B 102.C 103.B 127.C 128.B 152.B  
-		153.C 177.A 178.A  
-		
-		$process_arr2 =array(28,53,54,78,103,128,152);
-		foreach($score as $k=>$v){
-			if(in_array($v,$process_arr)){
-				$score[$k] = abs($v-2);
-			}
+		$process_arr2 =array(28=>'1',53=>'1',54=>'1',77=>'2',78=>'1',102=>'2',103=>'1',127=>'2',128=>'1',152=>'1',153=>'2',177=>'0',178=>'0');
+		foreach($process_arr2 as $k=>$v){
+			$score[$k] = ($score[$k]== $v?1:0);
 		}
-*/
-
+	
 		$A += $score[3] +$score[52] +$score[101] +$score[126] +$score[176] +$score[26] + $score[27] + $score[51] + $score[76] + $score[151];
-		$B += $score[180];
+		$B += $score[180] +$score[28] +$score[53] +$score[54] +$score[77] +$score[78] +$score[102] +$score[103] +$score[127] +$score[128] +$score[152] +$score[153] +$score[177] +$score[178];
 		$C += $score[4] +$score[30] +$score[55] +$score[104] +$score[105] +$score[129] +$score[130] +$score[179] +$score[5] +$score[29] +$score[79] +$score[80] +$score[154];
 		$E += $score[7] +$score[56] +$score[131] +$score[155] +$score[156] +$score[180] +$score[181] +$score[6] +$score[31] +$score[32] +$score[57] +$score[81] +$score[106];	
 		$F += $score[8] +$score[82] +$score[83] +$score[33] +$score[58] +$score[107] +$score[108] +$score[132] +$score[133] +$score[157] +$score[158] +$score[182] +$score[183];
@@ -88,12 +82,51 @@ class Pf extends Controller
 		$Q3+= $score[23] +$score[24] +$score[123] +$score[172] +$score[48] +$score[73] +$score[98] +$score[147] +$score[148] +$score[173];
 		$Q4+= $score[75] +$score[125] +$score[175] +$score[25] +$score[49] +$score[50] +$score[74] +$score[99] +$score[100] +$score[124] +$score[149] +$score[150] +$score[174];
 
-		if($score[4] == 1){
-			$C = $C + 2;
-		}else if($score[4] == 2){
-			$C = $C + 1;
-		}
+		if($sex == 1){
+			$A = deal_man_A($A);
+			$B = deal_B($B);
+			$C = deal_man_C($C);
+			$E = deal_man_E($E);
+			$F = deal_man_F($F);
+			$G = deal_man_G($G);
+			$H = deal_man_H($H);
+			$I = deal_man_I($I);
+			$L = deal_man_L($L);
+			$M = deal_man_M($M);
+			$N = deal_man_N($N);
+			$O = deal_man_O($O);
+			$Q1 = deal_man_Q1($Q1);
+			$Q2 = deal_man_Q2($Q2);
+			$Q3 = deal_man_Q3($Q3);
+			$Q4 = deal_man_Q4($Q4);
+		}else if($sex == 2){
+			$A = deal_woman_A($A);
+			$B = deal_B($B);
+			$C = deal_woman_C($C);
+			$E = deal_woman_E($E);
+			$F = deal_woman_F($F);
+			$G = deal_woman_G($G);
+			$H = deal_woman_H($H);
+			$I = deal_woman_I($I);
+			$L = deal_woman_L($L);
+			$M = deal_woman_M($M);
+			$N = deal_woman_N($N);
+			$O = deal_woman_O($O);
+			$Q1 = deal_woman_Q1($Q1);
+			$Q2 = deal_woman_Q2($Q2);
+			$Q3 = deal_woman_Q3($Q3);
+			$Q4 = deal_woman_Q4($Q4);
 
+
+			/*$arr = array($A,$B,$C,$E,$F,$G,$H,$I,$L,$M,$N,$O,$Q1,$Q3,$Q4);
+			$deal = array();
+			foreach($arr as $k=>$v){
+				$arr[$k]=deal_woman_($v);
+			}
+			*/
+		}else{
+			return '未知';
+		}
 
 	}
 	public function analyze()
@@ -103,4 +136,1122 @@ class Pf extends Controller
 		$this->assign('result',$result);
 		return $this->fetch('result');
 	}
+	public function deal_man_A($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=2:
+				echo 1;
+				break;
+			case $raw>=3 && $raw<=4:
+				echo 2;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw>=11 && $raw<=12:
+				echo 6;
+				break;
+			case $raw>=13 && $raw<=14:
+				echo 7;
+				break;
+			case $raw==15:
+				echo 8;
+				break;	
+			case $raw>=16 && $raw<=17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_B($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw==5:
+				echo 2;
+				break;
+			case $raw==6:
+				echo 3;
+				break;
+			case $raw==7:
+				echo 4;
+				break;
+			case $raw==8:
+				echo 5;	
+				break;	
+			case $raw==9:
+				echo 6;
+				break;
+			case $raw==10:
+				echo 7;
+				break;
+			case $raw==11:
+				echo 8;
+				break;	
+			case $raw==12:
+				echo 9;
+				break;
+			case $raw==13:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_C($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=6:
+				echo 1;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 2;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 3;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 4;
+				break;
+			case $raw>=13 && $raw<=14:
+				echo 5;	
+				break;	
+			case $raw>=15 && $raw<=17:
+				echo 6;
+				break;
+			case $raw>=18 && $raw<=19:
+				echo 7;
+				break;
+			case $raw==20:
+				echo 8;
+				break;	
+			case $raw>=21 && $raw<=22:
+				echo 9;
+				break;
+			case $raw>=23 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_E($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=5:
+				echo 1;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 2;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 3;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 4;
+				break;
+			case $raw>=12 && $raw<=13:
+				echo 5;	
+				break;	
+			case $raw>=14 && $raw<=16:
+				echo 6;
+				break;
+			case $raw>=17 && $raw<=18:
+				echo 7;
+				break;
+			case $raw>=19 && $raw<=20:
+				echo 8;
+				break;	
+			case $raw>=21 && $raw<=22:
+				echo 9;
+				break;
+			case $raw>=23 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_F($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=3:
+				echo 1;
+				break;
+			case $raw>=4 && $raw<=6:
+				echo 2;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 3;
+				break;
+			case $raw>=9 && $raw<=11:
+				echo 4;
+				break;
+			case $raw>=12 && $raw<=13:
+				echo 5;	
+				break;	
+			case $raw>=14 && $raw<=16:
+				echo 6;
+				break;
+			case $raw>=17 && $raw<=19:
+				echo 7;
+				break;
+			case $raw>=20 && $raw<=21:
+				echo 8;
+				break;	
+			case $raw>=22 && $raw<=23:
+				echo 9;
+				break;
+			case $raw>=24 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_G($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 2;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 3;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 4;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=14:
+				echo 6;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 7;
+				break;
+			case $raw==17:
+				echo 8;
+				break;	
+			case $raw>=18 && $raw<=19:
+				echo 9;
+				break;
+			case $raw==20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_H($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=1:
+				echo 1;
+				break;
+			case $raw>=2 && $raw<=3:
+				echo 2;
+				break;
+			case $raw>=4 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=11:
+				echo 5;	
+				break;	
+			case $raw>=12 && $raw<=14:
+				echo 6;
+				break;
+			case $raw>=15 && $raw<=17:
+				echo 7;
+				break;
+			case $raw>=18 && $raw<=19:
+				echo 8;
+				break;	
+			case $raw>=20 && $raw<=21:
+				echo 9;
+				break;
+			case $raw>=22 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_I($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=3:
+				echo 1;
+				break;
+			case $raw==4:
+				echo 2;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw>=11 && $raw<=12:
+				echo 6;
+				break;
+			case $raw>=13 && $raw<=14:
+				echo 7;
+				break;
+			case $raw==15:
+				echo 8;
+				break;	
+			case $raw>=16 && $raw<=17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_L($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=2:
+				echo 1;
+				break;
+			case $raw==3:
+				echo 2;
+				break;
+			case $raw>=4 && $raw<=5:
+				echo 3;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 4;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 5;	
+				break;	
+			case $raw>=10 && $raw<=12:
+				echo 6;
+				break;
+			case $raw==13:
+				echo 7;
+				break;
+			case $raw>=14 && $raw<=15:
+				echo 8;
+				break;	
+			case $raw>=16 && $raw<=17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_M($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=5:
+				echo 1;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 2;
+				break;
+			case $raw==8:
+				echo 3;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 4;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=14:
+				echo 6;
+				break;
+			case $raw==15:
+				echo 7;
+				break;
+			case $raw>=16 && $raw<=17:
+				echo 8;
+				break;	
+			case $raw==18:
+				echo 9;
+				break;
+			case $raw>=19 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_N($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=2:
+				echo 1;
+				break;
+			case $raw>=3 && $raw<=4:
+				echo 2;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw>=11 && $raw<=12:
+				echo 6;
+				break;
+			case $raw>=13 && $raw<=14:
+				echo 7;
+				break;
+			case $raw==15:
+				echo 8;
+				break;	
+			case $raw>=16 && $raw<=17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_O($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=1:
+				echo 1;
+				break;
+			case $raw==2:
+				echo 2;
+				break;
+			case $raw==3:
+				echo 3;
+				break;
+			case $raw>=4 && $raw<=5:
+				echo 4;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 5;	
+				break;	
+			case $raw>=8 && $raw<=10:
+				echo 6;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 7;
+				break;
+			case $raw>=13 && $raw>=14:
+				echo 8;
+				break;	
+			case $raw>=15 && $raw<=16:
+				echo 9;
+				break;
+			case $raw>=17 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_Q1($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=5:
+				echo 1;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 2;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 3;
+				break;
+			case $raw==10:
+				echo 4;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=14:
+				echo 6;
+				break;
+			case $raw==15:
+				echo 7;
+				break;
+			case $raw==16:
+				echo 8;
+				break;	
+			case $raw>=17 && $raw<=18:
+				echo 9;
+				break;
+			case $raw>=19 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_Q2($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=5:
+				echo 1;
+				break;
+			case $raw==6:
+				echo 2;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 3;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 4;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=15:
+				echo 6;
+				break;
+			case $raw>=16:
+				echo 7;
+				break;
+			case $raw>=17 && $raw<=18:
+				echo 8;
+				break;	
+			case $raw==19:
+				echo 9;
+				break;
+			case $raw==20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_Q3($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw==5:
+				echo 2;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 3;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 4;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 5;	
+				break;	
+			case $raw>=12 && $raw<=13:
+				echo 6;
+				break;
+			case $raw>=14 && $raw<=15:
+				echo 7;
+				break;
+			case $raw>=16 && $raw<=17:
+				echo 8;
+				break;	
+			case $raw==18:
+				echo 9;
+				break;
+			case $raw>=19 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_man_Q4($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=2:
+				echo 1;
+				break;
+			case $raw>=3 && $raw<=4:
+				echo 2;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw>=11 && $raw<=13:
+				echo 6;
+				break;
+			case $raw>=14 && $raw<=15:
+				echo 7;
+				break;
+			case $raw>=16 && $raw<=17:
+				echo 8;
+				break;	
+			case $raw>=18 && $raw<=19:
+				echo 9;
+				break;
+			case $raw>=20 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_A($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=2:
+				echo 1;
+				break;
+			case $raw>=3 && $raw<=4:
+				echo 2;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw>=11 && $raw<=12:
+				echo 6;
+				break;
+			case $raw>=13 && $raw<=14:
+				echo 7;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 8;
+				break;	
+			case $raw==17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_C($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=5:
+				echo 1;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 2;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 3;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 4;
+				break;
+			case $raw>=12 && $raw<=13:
+				echo 5;	
+				break;	
+			case $raw>=14 && $raw<=16:
+				echo 6;
+				break;
+			case $raw>=17 && $raw<=18:
+				echo 7;
+				break;
+			case $raw>=19 && $raw<=18:
+				echo 8;
+				break;	
+			case $raw>=16 && $raw<=17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_E($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=5:
+				echo 1;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 2;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 3;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 4;
+				break;
+			case $raw>=12 && $raw<=13:
+				echo 5;	
+				break;	
+			case $raw>=14 && $raw<=15:
+				echo 6;
+				break;
+			case $raw>=16 && $raw<=17:
+				echo 7;
+				break;
+			case $raw>=18 && $raw<=19:
+				echo 8;
+				break;	
+			case $raw>=20 && $raw<=21:
+				echo 9;
+				break;
+			case $raw>=22 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_F($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 2;
+				break;
+			case $raw>=7 && $raw<=9:
+				echo 3;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 4;
+				break;
+			case $raw>=12 && $raw<=14:
+				echo 5;	
+				break;	
+			case $raw>=15 && $raw<=17:
+				echo 6;
+				break;
+			case $raw>=18 && $raw<=19:
+				echo 7;
+				break;
+			case $raw>=20 && $raw<=21:
+				echo 8;
+				break;	
+			case $raw>=22 && $raw<=24:
+				echo 9;
+				break;
+			case $raw>=25 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_G($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw==5:
+				echo 2;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 3;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 4;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 5;	
+				break;	
+			case $raw>=12 && $raw<=13:
+				echo 6;
+				break;
+			case $raw>=14 && $raw<=15:
+				echo 7;
+				break;
+			case $raw==16:
+				echo 8;
+				break;	
+			case $raw==17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_H($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=1:
+				echo 1;
+				break;
+			case $raw>=2 && $raw<=3:
+				echo 2;
+				break;
+			case $raw>=4 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=11:
+				echo 5;	
+				break;	
+			case $raw>=12 && $raw<=14:
+				echo 6;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 7;
+				break;
+			case $raw>=17 && $raw<=18:
+				echo 8;
+				break;	
+			case $raw>=19 && $raw<=20:
+				echo 9;
+				break;
+			case $raw>=21 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_I($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw==5:
+				echo 2;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 3;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 4;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 5;	
+				break;	
+			case $raw>=12 && $raw<=13:
+				echo 6;
+				break;
+			case $raw==14:
+				echo 7;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 8;
+				break;	
+			case $raw==17:
+				echo 9;
+				break;
+			case $raw>=18 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_L($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=3:
+				echo 1;
+				break;
+			case $raw==4:
+				echo 2;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw>=11 && $raw<=12:
+				echo 6;
+				break;
+			case $raw==13:
+				echo 7;
+				break;
+			case $raw>=14 && $raw<=15:
+				echo 8;
+				break;	
+			case $raw==16:
+				echo 9;
+				break;
+			case $raw>=17 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_M($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=6:
+				echo 1;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 2;
+				break;
+			case $raw==9:
+				echo 3;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 4;
+				break;
+			case $raw>=12 && $raw<=13:
+				echo 5;	
+				break;	
+			case $raw>=14 && $raw<=15:
+				echo 6;
+				break;
+			case $raw>=16 && $raw<=17:
+				echo 7;
+				break;
+			case $raw==18:
+				echo 8;
+				break;	
+			case $raw==19:
+				echo 9;
+				break;
+			case $raw>=20 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_N($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=3:
+				echo 1;
+				break;
+			case $raw>=4 && $raw<=5:
+				echo 2;
+				break;
+			case $raw==6:
+				echo 3;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 4;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 5;	
+				break;	
+			case $raw==11:
+				echo 6;
+				break;
+			case $raw==12:
+				echo 7;
+				break;
+			case $raw>=13 && $raw<=14:
+				echo 8;
+				break;	
+			case $raw==15:
+				echo 9;
+				break;
+			case $raw>=16 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_O($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=1:
+				echo 1;
+				break;
+			case $raw==2:
+				echo 2;
+				break;
+			case $raw>=3 && $raw<=4:
+				echo 3;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 4;
+				break;
+			case $raw>=7 && $raw<=9:
+				echo 5;	
+				break;	
+			case $raw>=10 && $raw<=11:
+				echo 6;
+				break;
+			case $raw>=12 && $raw<=14:
+				echo 7;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 8;
+				break;	
+			case $raw>=17 && $raw<=18:
+				echo 9;
+				break;
+			case $raw>=19 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_Q1($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=6:
+				echo 1;
+				break;
+			case $raw==7:
+				echo 2;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 3;
+				break;
+			case $raw==10:
+				echo 4;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=14:
+				echo 6;
+				break;
+			case $raw==15:
+				echo 7;
+				break;
+			case $raw==16:
+				echo 8;
+				break;	
+			case $raw>=17 && $raw<=18:
+				echo 9;
+				break;
+			case $raw>=19 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_Q2($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 2;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 3;
+				break;
+			case $raw>=9 && $raw<=10:
+				echo 4;
+				break;
+			case $raw>=11 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=14:
+				echo 6;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 7;
+				break;
+			case $raw==17:
+				echo 8;
+				break;	
+			case $raw>=18 && $raw<=19:
+				echo 9;
+				break;
+			case $raw==20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_Q3($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=4:
+				echo 1;
+				break;
+			case $raw>=5 && $raw<=6:
+				echo 2;
+				break;
+			case $raw>=7 && $raw<=8:
+				echo 3;
+				break;
+			case $raw==9:
+				echo 4;
+				break;
+			case $raw>=10 && $raw<=12:
+				echo 5;	
+				break;	
+			case $raw>=13 && $raw<=14:
+				echo 6;
+				break;
+			case $raw==15:
+				echo 7;
+				break;
+			case $raw>=16 && $raw<=17:
+				echo 8;
+				break;	
+			case $raw==18:
+				echo 9;
+				break;
+			case $raw>=19 && $raw<=20:
+				echo 10;
+				break;
+		}
+	}
+	public function deal_woman_Q4($raw)
+	{
+		switch ($raw)
+		{
+			case $raw>=0 && $raw<=3:
+				echo 1;
+				break;
+			case $raw>=4 && $raw<=5:
+				echo 2;
+				break;
+			case $raw>=6 && $raw<=7:
+				echo 3;
+				break;
+			case $raw>=8 && $raw<=9:
+				echo 4;
+				break;
+			case $raw>=10 && $raw<=11:
+				echo 5;	
+				break;	
+			case $raw>=12 && $raw<=14:
+				echo 6;
+				break;
+			case $raw>=15 && $raw<=16:
+				echo 7;
+				break;
+			case $raw>=17 && $raw<=18:
+				echo 8;
+				break;	
+			case $raw>=19 && $raw<=20:
+				echo 9;
+				break;
+			case $raw>=21 && $raw<=26:
+				echo 10;
+				break;
+		}
+	}
+	//man_G和woman_Q2 是一样的
+
 }

@@ -29,16 +29,26 @@ button{
 #back_1{
     display: none;
 }
-
+.begin{
+    text-align:center;
+}
 </style>
 <body>
 <div class="grade_warp">
+
+    <div class="begin">
+        <p>开始做答前，请先选择你的性别</p>
+        <a class="layui-btn layui-btn-big layui-btn-normal sex">我是帅哥</a>
+        <a class="layui-btn layui-btn-big layui-btn-danger sex">我是美女</a>
+        <input type="hidden" id="sex" value="" />
+    </div>
+
 <?php foreach($question as $k=>$v){ ?>
     <div id="{$v['id']}" class="question">
     <p>{$v['id']}.{$v['Question']}</p>
-    <a class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm">A.{$v['Aoption']}</a>
-    <a class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm">B.{$v['Boption']}</a>
-    <a class="layui-btn layui-btn-lg layui-btn-radius layui-btn-warm">C.{$v['Coption']}</a>
+    <a class="layui-btn layui-btn-big layui-btn-radius layui-btn-warm">A.{$v['Aoption']}</a>
+    <a class="layui-btn layui-btn-big layui-btn-radius layui-btn-warm">B.{$v['Boption']}</a>
+    <a class="layui-btn layui-btn-big layui-btn-radius layui-btn-warm">C.{$v['Coption']}</a>
     <input type="hidden" id="option_{$v['id']}" value="" />
     <br/>
     </div>
@@ -51,13 +61,20 @@ button{
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 $(function(){  
-    $('#1').show();
+   
 }) 
+$('.sex').click(function(){
+    var index = $(this).index();
+    $("#sex").val(index);
+    $('.begin').hide();
+    $('#1').show();
+})
+
 $('a').click(function(){
     var index = $(this).index();
-    $(this).parent().children('a').prop('class','layui-btn layui-btn-lg layui-btn-radius layui-btn-warm');
+    $(this).parent().children('a').prop('class','layui-btn layui-btn-big layui-btn-radius layui-btn-warm');
     $(this).parent().children('input').val(--index);
-    $(this).prop('class','layui-btn layui-btn-lg layui-btn-radius');
+    $(this).prop('class','layui-btn layui-btn-big layui-btn-radius');
     var id =$(this).parent('div').prop('id');
     setTimeout(function(){
         if(id == "1"){
@@ -82,16 +99,20 @@ $('.back').click(function(){
 });
 $('#submit').click(function(){
 	var score =[];
-	for(var i=3;i<5;i++){
+    var sex = $('#sex').val();
+	for(var i=3;i<10;i++){
 		score[i] = $("#option_"+i).val();
 	}
+    
 	$.post('/index.php/psytest/pf/deal',
 	{
-		score:score
+		score:score,
+        sex:sex
 	},
 		function(data,status){
 			if(status == "success"){
 				location.href = "/index.php/psytest/pf/analyze?lx="+data;
+                console.log(data);
 			}
     });
 	
